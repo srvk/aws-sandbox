@@ -1,1 +1,4 @@
 # Token files
+id_rsa
+id_rsa.pub
+secrets.sh
