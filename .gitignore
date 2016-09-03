@@ -1,1 +1,4 @@
-# Token files
+# this contains my secrets
+secret*
+id_rsa
+.vagrant

@@ -1,0 +1,24 @@
+Content-Type: multipart/mixed; boundary="===============8056548621037171878=="
+MIME-Version: 1.0
+
+--===============8056548621037171878==
+Content-Type: text/cloud-boothook; charset="us-ascii"
+MIME-Version: 1.0
+Content-Transfer-Encoding: 7bit
+Content-Disposition: attachment; filename="boothook"
+
+#cloud-boothook
+!/bin/bash
+sed -i 's/Defaults    requiretty/# Defaults    requiretty/' /etc/sudoers
+
+--===============8056548621037171878==
+Content-Type: text/cloud-config; charset="us-ascii"
+MIME-Version: 1.0
+Content-Transfer-Encoding: 7bit
+Content-Disposition: attachment; filename="config1"
+
+#cloud-config
+ssh_authorized_keys:
+  - ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDY5vGM33YliVzfobe86VJ/LdF3c0bs/XE3LhtJRnoM+T8z5k/I0JtC8ks34GG1SrhOUFIqyKVB5UVktHmdyq6BRYanE4hykuNXkJmq9H1ULX61EKV/qL6GdHmJ7xi2vvOWRfTi8Mr8upaZYKSGB4UiGJRAqUUqpkD4dljJvLJ+/GdIJLelX5lz1nZYnz6IPTwTH7teVcf6TRuuu6FWjgIk9fltK+5qv7K7mfjDmYWihUIdik77RmX6toj4yIzrFzh3jsvWZ8OyDKIiMDVoV2m6fQZdQ5iXtrwFz5d/bcTWWUxKEe5PxZl534YJ9Q9Ovt4mv6nHO5NRHNLQ5eLNZnI9 ec2-user
+
+--===============8056548621037171878==--
