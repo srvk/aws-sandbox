@@ -1,4 +1,6 @@
 # this contains my secrets
 secret*
 id_rsa
+
+# vagrant
 .vagrant
