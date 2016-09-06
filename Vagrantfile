@@ -1,11 +1,12 @@
 Vagrant.configure("2") do |config|
 
   config.vm.define "gpu" do |gpu|
-    config.vm.provider "aws" do |aws|
+    config.vm.provider "aws" do |aws, override|
       # NVIDIA AMI in N Virginia (https://aws.amazon.com/marketplace/ordering?productId=d3fbf14b-243d-46e0-916c-82a8bf6955b4&ref_=dtl_psb_continue&region=us-east-1)
       aws.ami = "ami-2e5e9c43"
-      #aws.instance_type="g2.2xlarge"
-      aws.instance_type="g2.8xlarge"
+      aws.instance_type="g2.2xlarge"
+      #aws.instance_type="g2.8xlarge"
+      override.ssh.username = "ec2-user"
 
       # try ami-34148f23
       # sudo add-apt-repository ppa:graphics-drivers/ppa
@@ -17,26 +18,12 @@ Vagrant.configure("2") do |config|
   end
 
   config.vm.define "gpubuntu" do |gpu|
-    config.vm.provider "aws" do |aws|
-      # Ubuntu 16.04 AMI on which NVIDIA can be installed easily
-      aws.ami = "ami-34148f23"
-      aws.instance_type="g2.2xlarge"
-      #aws.instance_type="g2.8xlarge"
-
-      # sudo add-apt-repository ppa:graphics-drivers/ppa
-      # sudo apt update
-      # sudo apt-get install nvidia-370-dev
-      # sudo reboot
-      # "apt-cache search nvidia"
-    end
-  end
-
-  config.vm.define "gpubuntu" do |gpu|
-    config.vm.provider "aws" do |aws|
+    config.vm.provider "aws" do |aws, override|
       # Ubuntu 16.04 AMI on which NVIDIA can be installed easily (https://cloud-images.ubuntu.com/locator/ec2/)
       aws.ami = "ami-34148f23"
       aws.instance_type="g2.2xlarge"
       #aws.instance_type="g2.8xlarge"
+      override.ssh.username = "ubuntu"
 
       # sudo add-apt-repository ppa:graphics-drivers/ppa
       # sudo apt update
@@ -76,8 +63,6 @@ Vagrant.configure("2") do |config|
     # your AWS access keys
     aws.keypair_name = ENV['AWS_KEYPAIR']
     # something like "ec2user" (ssh key pair)
-    override.ssh.username = "ubuntu"
-    #override.ssh.username = "ec2-user"
     override.ssh.private_key_path = ENV['AWS_PEM']
     # something like "~/.ssh/ec2.pem"
 
@@ -93,7 +78,6 @@ Vagrant.configure("2") do |config|
     # This is so that 'sudo' does not require a TTY and can run immediately
     # Further it allows our multiple machines to talk to each other via ssh (and updates packages)
     # Create with "write-mime-multipart --output=user_data.txt boothook:text/cloud-boothook config"
-    # Before, do: sudo yum install /usr/bin/write-mime-multipart
     aws.user_data = File.read("user_data.txt")
     #aws.user_data = "#boothook\n!/bin/bash\nsed -i 's/Defaults    requiretty/# Defaults    requiretty/' /etc/sudoers"
     #aws.user_data = "#cloud-config\npackage_upgrade: true"
@@ -129,8 +113,11 @@ Vagrant.configure("2") do |config|
   end
 
   # run final provisions
+  # (1) install the main system-level software stack
   config.vm.provision "shell", path: "scripts/sw.sh"
+  # (2) install network-related services (file systems)
   config.vm.provision "shell", path: "scripts/network.sh"
+  # (3) some clean-up and stuff that we may need to do on reboot
   config.vm.provision "shell", inline: <<-SHELL
     if [[ `awk '{print $1; exit}' /etc/issue` =~ buntu ]]; then
       # Assume we are on Virtualbox (Ubuntu)
@@ -162,5 +149,8 @@ Vagrant.configure("2") do |config|
       sudo chmod 777 /media/ephemeral0
     fi
   SHELL
+  # (4) install user-level software 
   config.vm.provision "shell", path: "scripts/eesen.sh", privileged: false
+  # (5) we could auto-run the experiments (but don't)
+  #config.vm.provision "shell", path: "scripts/exps.sh"
 end

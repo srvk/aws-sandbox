@@ -23,5 +23,5 @@ else
     sudo yum update -y
     sudo yum install -y torque-client torque-server torque-scheduler torque-mom git zlib-devel \
          automake libtool autoconf patch subversion atlas-sse3-devel glib2-devel gcc-c++ \
-         fuse fuse-devel fuse-sshfs
+         fuse fuse-devel fuse-sshfs cloud-utils
 fi

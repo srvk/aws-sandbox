@@ -53,8 +53,9 @@ if true; then
     make -j -k || make
     make install
     
-    mkdir -pm 777 /media/ephemeral0/s3fs /media/s3fs
-    # echo "$S3_KEY:$S3_SECRET" > ~/.passwd-s3fs
+    mkdir -pm 777 /media/s3fs /media/ephemeral0/s3fs-cache
+    sed -i 's/# user_allow_other/user_allow_other/' /etc/fuse.conf
+    # echo "$AWS_KEY:$AWS_SECRETKEY" > ~/.passwd-s3fs
     # chmod 600 ~/.passwd-s3fs
     # s3fs -o use_cache=/media/ephemeral0/s3fs-cache -o use_rrs -o allow_other "fmetze-bucket:" /media/s3fs
 fi
