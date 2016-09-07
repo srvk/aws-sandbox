@@ -4,7 +4,7 @@ You need to do the following steps in order to be able to use the provided AMI.
 
 - Do
 
-[Next, run some experiments.](IS2016-Running.md)
+[Next, fire up the VM.](IS2016-Running.md)
 
 ## Contact
 
