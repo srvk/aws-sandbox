@@ -1,3 +1,12 @@
+# PUSHING THE FRONTIERS OF SPEECH PROCESSING – WHAT DOES IT TAKE TO TACKLE NEW LANGUAGES AND DOMAINS? (INTERSPEECH 2016 Tutorial)
+
+- The "aws-sandbox" is hosting the VM that will be made available to participants at this tutorial
+- See more at: <http://www.interspeech2016.org/Tutorial-Descriptions#sthash.P84IDxeb.dpuf>
+- If you are a participant in the tutorial, please e-mail your Amazon ID to Florian Metze (<https://www.cs.cmu.edu/directory/fmetze>)
+- We will then give you permissions to access the pre-built AMI "ami-70433767", which also contains the needed data
+- Find more insttructions and documentation here
+- You can use the remainder of this repository to see how the VM is built, and re-built it yourself, adding other data (more Babel languages), or building a VM to run on other providers (e.g. your own cluster, etc.)
+
 # aws-sandbox
 
 Create a VM on AWS with Vagrant and run ASR experiments
