@@ -8,7 +8,14 @@ You need to do the following steps in order to run the provided AMI:
 - Storage should be configured correctly
 - You can add (name) tags
 - You should eventually get something that looks like this
-- 
+
+[[https://github.com/srvk/aws-sandbox/blob/master/2016-09-07%2012.59.06%20pm.png]]
+
+- After launching the AMI, a new instance should appear in your [list of instances](https://console.aws.amazon.com/ec2/v2/home?region=us-east-1#Instances:sort=instanceState)
+- Once the state is running and the 2 checks have been completed successfully, click on the new instance, and select "Connect"
+- You should get a popup window from which you can copy and paste a line that will allow you to connect to the instance (after some modifications)
+- My line will typically look like this: ssh -i ~/.ssh/ec2mykey.pem ec2-user@ec2-54-174-10-140.compute-1.amazonaws.com (I have to change the path to my key and the user name)
+- Enjoy!
 
 [Next, run some experiments.](IS2016-Experiments.md)
 
