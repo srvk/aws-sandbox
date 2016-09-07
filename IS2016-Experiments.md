@@ -33,6 +33,7 @@ You can do the following experiments in the VM:
   - `train-7-gpu.sh` will run the actual DNN training. It will need a few hours to run (or a day and a half), and you can see the progress in the `exp/train_l7_c100_n60_h0.7_v7v/log` directory
   - `test-7-v1_x3.sh` will test the acoustic model. It will take a model, and put the decoding result (including WER, etc.) in `exp/train_l7_c100_n60_h0.7_v7v/decode_dev10h_v0`
 
+- There are many more things that you can do, like training multi-lingual systems or porting features to new languages or domains. We will add more documentation about this here and to the [Eesen repository](https://github.com/srvk/eesen) as things stabilize. Get in touch!
 
 [Back to the main README.](README.md)
 
