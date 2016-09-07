@@ -4,7 +4,7 @@
 - See more at: <http://www.interspeech2016.org/Tutorial-Descriptions#sthash.P84IDxeb.dpuf>
 - **If you are a participant in the tutorial, please send your Amazon ID to Florian Metze (<https://www.cs.cmu.edu/directory/fmetze>) by e-mail**
 - **We will then give you permissions to access the pre-built AMI _ami-70433767_, which also contains the needed data**
-- **Find more instructions and documentation here, starting with [initial preparations.](IS2016-Preparing.md)**
+- **Find more instructions and documentation [here](http://speechkitchen.org/interspeech-haitian-demo-vm/), or there, starting with [initial preparations.](IS2016-Preparing.md)**
 - You can use the remainder of this repository to see how the VM is built, and re-built it yourself, adding other data (more Babel languages), or building a VM to run on other providers (e.g. your own cluster, etc.)
 
 # aws-sandbox
