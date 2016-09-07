@@ -1,8 +1,10 @@
 # Before running the VM
 
-You need to do the following steps in order to run the provided AMI:
+You need to do the following steps in order to be able to use the provided AMI.
 
 - Do
+
+[Next, run some experiments.](IS2016-Running.md)
 
 ## Contact
 
