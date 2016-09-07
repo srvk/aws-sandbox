@@ -87,6 +87,11 @@ The documentation at the Speech Recognition Virtual Kitchen (<https://github.com
 may be helpful, in particular the part about the Eesen Transcriber.
 
 
+## License
+
+See the attached [LICENSE.md](LICENSE.md), however be aware that some of the software installed with this Vagrantfile may have its own license conditions.
+
+
 ## Contact
 
 Contact Florian Metze (<https://www.cs.cmu.edu/directory/fmetze>) or 
