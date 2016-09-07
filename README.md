@@ -2,9 +2,9 @@
 
 - The "aws-sandbox" is hosting the VM that will be made available to participants at this tutorial
 - See more at: <http://www.interspeech2016.org/Tutorial-Descriptions#sthash.P84IDxeb.dpuf>
-- If you are a participant in the tutorial, please e-mail your Amazon ID to Florian Metze (<https://www.cs.cmu.edu/directory/fmetze>)
-- We will then give you permissions to access the pre-built AMI "ami-70433767", which also contains the needed data
-- Find more instructions and documentation here, starting with [initial preparations.](IS2016-Preparing.md)
+- **If you are a participant in the tutorial, please send your Amazon ID to Florian Metze (<https://www.cs.cmu.edu/directory/fmetze>) by e-mail**
+- **We will then give you permissions to access the pre-built AMI _ami-70433767_, which also contains the needed data**
+- **Find more instructions and documentation here, starting with [initial preparations.](IS2016-Preparing.md)**
 - You can use the remainder of this repository to see how the VM is built, and re-built it yourself, adding other data (more Babel languages), or building a VM to run on other providers (e.g. your own cluster, etc.)
 
 # aws-sandbox
@@ -70,7 +70,7 @@ Log in using either username/ password, or the keys that Vagrant (or yourself) b
 
 ## Running Experiments
 
-Do stuff.
+Do stuff. Check out [experiments](IS2016-Experiments.md).
 
 
 ## Ideas
