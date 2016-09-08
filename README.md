@@ -1,3 +1,12 @@
+# PUSHING THE FRONTIERS OF SPEECH PROCESSING – WHAT DOES IT TAKE TO TACKLE NEW LANGUAGES AND DOMAINS? (INTERSPEECH 2016 Tutorial)
+
+- The "aws-sandbox" is hosting the VM that will be made available to participants at this tutorial
+- See more at: <http://www.interspeech2016.org/Tutorial-Descriptions#sthash.P84IDxeb.dpuf>
+- **If you are a participant in the tutorial, please send your Amazon ID to Florian Metze (<https://www.cs.cmu.edu/directory/fmetze>) by e-mail**
+- **We will then give you permissions to access the pre-built AMI _ami-70433767_, which also contains the needed data**
+- **Find more instructions and documentation [here](http://speechkitchen.org/interspeech-haitian-demo-vm/), or there, starting with [initial preparations.](IS2016-Preparing.md)**
+- You can use the remainder of this repository to see how the VM is built, and re-built it yourself, adding other data (more Babel languages), or building a VM to run on other providers (e.g. your own cluster, etc.)
+
 # aws-sandbox
 
 Create a VM on AWS with Vagrant and run ASR experiments
@@ -61,7 +70,7 @@ Log in using either username/ password, or the keys that Vagrant (or yourself) b
 
 ## Running Experiments
 
-Do stuff.
+Do stuff. Check out [experiments](IS2016-Experiments.md).
 
 
 ## Ideas
@@ -76,6 +85,11 @@ a bit cheaper.
 
 The documentation at the Speech Recognition Virtual Kitchen (<https://github.com/srvk>)
 may be helpful, in particular the part about the Eesen Transcriber.
+
+
+## License
+
+See the attached [license](LICENSE), however be aware that some of the software installed with this Vagrantfile may have its own license conditions.
 
 
 ## Contact
