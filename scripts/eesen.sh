@@ -24,15 +24,15 @@ make -j -k || make
 # the trick above should speed up compilation ...
 
 # Install kenlm rather than SRILM
-cd
 sudo yum install -y cmake boost-devel bzip2-devel eigen3-devel
+cd
+wget -O - --quiet http://kheafield.com/code/kenlm.tar.gz |tar xz
 (cd kenlm; cmake . && make -j)
-
 
 # We also need SoX
 cd
 wget -O - --quiet http://downloads.sourceforge.net/project/sox/sox/14.4.2/sox-14.4.2.tar.bz2 | tar -xvjf -
-(cd sox-14.4.2; make -s -j; sudo make install)
+(cd sox-14.4.2 && ./configure && make -s -j && sudo make install)
 
 # Install the Eesen Babel experiments (and the Kaldi scripts)
 cd
@@ -41,5 +41,7 @@ git clone -b babel-exps https://fmetze@bitbucket.org/mgowayyed/lorelei-audio.git
 git clone https://github.com/kaldi-asr/kaldi
 (cd kaldi; git reset --hard b77e93095b81b9e93322b90e74d12b4469089e17)
 # they changed the calls to arpa2fst, does not concern us here
-(cd babel-egps/egs; ln -s ../../kaldi/egs/babel .)
-(cd /media/s3fs; unzip /media/s3fs/IARPA-babel201b-v0.2b.build_LDC2016E08.zip; ln -s IARPA-babel201b-v0.2b.build 201-B)
+(cd babel-exps/egs; ln -s ../../kaldi/egs/babel .)
+#(cd /media/s3fs; unzip /media/s3fs/IARPA-babel201b-v0.2b.build_LDC2016E08.zip; ln -s IARPA-babel201b-v0.2b.build 201-B)
+# patch the scoring software to handle Babel data in UTF-8
+patch eesen/tools/sctk/bin/hubscr.pl < /vagrant/scripts/hubscr.diff

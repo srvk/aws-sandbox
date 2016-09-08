@@ -1,0 +1,4 @@
+632c632
+<         $command = "$SCLITE -r $reff stm -h $hyp_oname $hypfileformat $hyp_iname -F -D -o sum rsum sgml lur dtl pra prf -C det sbhist hist $outname";
+---
+>         $command = "$SCLITE -r $reff stm -h $hyp_oname $hypfileformat $hyp_iname -e utf-8 babel_turkish -F -D -o sum rsum sgml lur dtl pra prf -C det sbhist hist $outname";

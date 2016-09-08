@@ -56,10 +56,9 @@ if true; then
     mkdir -pm 777 /media/s3fs /media/ephemeral0/s3fs-cache
     sed -i 's/# user_allow_other/user_allow_other/' /etc/fuse.conf
     # echo "$AWS_KEY:$AWS_SECRETKEY" > ~/.passwd-s3fs
-    # chmod 600 ~/.passwd-s3fs
+    # chmod 400 ~/.passwd-s3fs
     # s3fs -o use_cache=/media/ephemeral0/s3fs-cache -o use_rrs -o allow_other "fmetze-bucket:" /media/s3fs
 fi
-
 
 # Or use EFS service to access files via NFS
 #mkdir -pm 777 /media/babel
