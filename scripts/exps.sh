@@ -1,5 +1,7 @@
 #!/bin/bash
 
+sudo chmod 777 /media/ephemeral0 || echo storage already accessible
+
 # Prepare experiments. We use kenlm instead of srilm
 cd babel-exps/egs/asr/s5c/201-haitian-flp
 ln -s spkList.dev spkList.dev2h
