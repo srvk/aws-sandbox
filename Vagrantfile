@@ -19,9 +19,9 @@ Vagrant.configure("2") do |config|
 
   config.vm.define "gpubuntu" do |gpu|
     config.vm.provider "aws" do |aws, override|
-      # Ubuntu 16.04 AMI on which NVIDIA can be installed easily (https://cloud-images.ubuntu.com/locator/ec2/)
-      aws.ami = "ami-34148f23"
-      aws.instance_type="g2.2xlarge"
+      # Ubuntu 16.04 hvm:ebs-ssd AMI on which NVIDIA can be installed easily (https://cloud-images.ubuntu.com/locator/ec2/)
+      aws.ami = "ami-e3c3b8f4"
+      aws.instance_type="p2.xlarge"
       #aws.instance_type="g2.8xlarge"
       override.ssh.username = "ubuntu"
 
@@ -71,8 +71,10 @@ Vagrant.configure("2") do |config|
 
     # Not sure which of these we want
     #aws.security_groups = [ "CMU Addresses", "default" ]
-    #aws.subnet_id = "vpc-666c9a02"
-    aws.security_groups = "launch-wizard-1"
+    aws.security_groups = ENV['AWS_SECGRPS'] # cannot use names here!
+    aws.subnet_id = ENV['AWS_SUBNETID'] # vagrantVPC publicSubnet
+    aws.associate_public_ip = true
+    aws.elastic_ip = true
 
     # Relevant for Amazon Linux
     # This is so that 'sudo' does not require a TTY and can run immediately
