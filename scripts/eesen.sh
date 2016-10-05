@@ -4,6 +4,27 @@
 if [[ `awk '{print $1; exit}' /etc/issue` =~ buntu ]]; then
     echo "dash dash/sh boolean false" | sudo debconf-set-selections -v
     sudo dpkg-reconfigure dash -f noninteractive
+
+    # install slurm (buggy in Ubuntu 16.04.1 LTS)
+    sudo apt-get update
+    sudo apt-get install -y munge
+    sudo mkdir -p /etc/systemd/system/munge.service.d && echo -e "[Service]\nExecStart=\nExecStart=/usr/sbin/munged --syslog --force" | sudo tee /etc/systemd/system/munge.service.d/override.conf && sudo systemctl daemon-reload
+    sudo systemctl enable munge
+    sudo systemctl start munge
+    sudo apt-get install -y slurm-llnl
+    echo -e "ControlMachine=localhost\nAuthType=auth/munge\nCacheGroups=0\nCryptoType=crypto/munge\nJobCheckpointDir=/var/lib/slurm-llnl/checkpoint\nMpiDefault=none\nProctrackType=proctrack/pgid\nReturnToService=1\nSlurmctldPidFile=/var/run/slurm-llnl/slurmctld.pid\nSlurmctldPort=6817\nSlurmdPidFile=/var/run/slurm-llnl/slurmd.pid\nSlurmdPort=6818\nSlurmdSpoolDir=/var/lib/slurm-llnl/slurmd\nSlurmUser=slurm\nStateSaveLocation=/var/lib/slurm-llnl/slurmctld\nSwitchType=switch/none\nTaskPlugin=task/none\nInactiveLimit=0\nKillWait=30\nMinJobAge=300\nSlurmctldTimeout=300\nSlurmdTimeout=300\nWaittime=0\nFastSchedule=0\nSchedulerType=sched/backfill\nSchedulerPort=7321\nSelectType=select/cons_res\nSelectTypeParameters=CR_Core_Memory\nAccountingStorageType=accounting_storage/none\nClusterName=cluster\nJobCompType=jobcomp/none\nJobAcctGatherFrequency=30\nJobAcctGatherType=jobacct_gather/none\nSlurmctldDebug=3\nSlurmctldLogFile=/var/log/slurm-llnl/slurmctld.log\nSlurmdDebug=3\nSlurmdLogFile=/var/log/slurm-llnl/slurmd.log\nNodeName=localhost Procs=8 State=UNKNOWN\nPartitionName=standard Nodes=localhost Default=YES MaxTime=INFINITE State=UP" | sudo tee /etc/slurm-llnl/slurm.conf
+    sudo touch /var/spool/job_state
+    sudo systemctl enable slurmd
+    sudo systemctl enable slurmctld
+    sudo systemctl start slurmd
+    sudo systemctl start slurmctld
+fi
+
+# We also need SoX
+if [ -z `which sox` ]; then
+    cd
+    wget -O - --quiet http://downloads.sourceforge.net/project/sox/sox/14.4.2/sox-14.4.2.tar.bz2 | tar -xvjf -
+    (cd sox-14.4.2 && ./configure && make -s -j && sudo make install)
 fi
 
 # Compile Eesen
@@ -24,15 +45,9 @@ make -j -k || make
 # the trick above should speed up compilation ...
 
 # Install kenlm rather than SRILM
-sudo yum install -y cmake boost-devel bzip2-devel eigen3-devel
 cd
 wget -O - --quiet http://kheafield.com/code/kenlm.tar.gz |tar xz
 (cd kenlm; cmake . && make -j)
-
-# We also need SoX
-cd
-wget -O - --quiet http://downloads.sourceforge.net/project/sox/sox/14.4.2/sox-14.4.2.tar.bz2 | tar -xvjf -
-(cd sox-14.4.2 && ./configure && make -s -j && sudo make install)
 
 # Install the Eesen Babel experiments (and the Kaldi scripts)
 cd
