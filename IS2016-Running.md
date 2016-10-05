@@ -2,7 +2,7 @@
 
 You need to do the following steps in order to run the provided AMI:
 
-- Find the AMI that you want to start by entering _ami-70433767_ into the [search box here](https://console.aws.amazon.com/ec2/v2/home?region=us-east-1#LaunchInstanceWizard:) (US East, N. Virginia region!)
+- Find the AMI that you want to start by entering _ami-1831460f_ into the [search box here](https://console.aws.amazon.com/ec2/v2/home?region=us-east-1#LaunchInstanceWizard:) (US East, N. Virginia region!)
 - The VM should be found (if not, check with us if permissions have been set correctly), and you can run it on a _g2.2xlarge_ (_g2.8xlarge_ works as well) instance
 - You should be able to leave all the "instance details" as is, but you may want to configure a VPC or other security group. You can also request spot instances, to save money (but risk termination).
 - Storage should be configured correctly
