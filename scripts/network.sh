@@ -22,8 +22,9 @@ if false; then
     sudo make install
     # maybe also use something like https://github.com/pcarrier/afuse
 
-    # sshfs -C fmetze@rocks.is.cs.cmu.edu:/data/ASR5/ /data/ASR5 -o Ciphers=arcfour
+    # sshfs -C fmetze@rocks.is.cs.cmu.edu:/data/ASR5/ /data/ASR5 -o Ciphers=arcfour -o allow_other,uid=`id -u`,gid=`id -g`
 fi
+sed -i 's/#user_allow_other/user_allow_other/' /etc/fuse.conf
 
 # Get SSH stuff in place
 #sudo su -l -c /vagrant/scripts/sshfs.sh -s /bin/bash ${user}

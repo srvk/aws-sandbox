@@ -6,7 +6,7 @@ if [[ `awk '{print $1; exit}' /etc/issue` =~ buntu ]]; then
     sudo apt-get upgrade -y
     sudo apt-get install -y torque-client torque-server torque-scheduler torque-mom git zlib1g-dev \
          automake libtool autoconf patch subversion libatlas3-base sshfs g++ \
-	 python2.7 python-minimal libtool-bin sox
+	 python2.7 python-minimal libtool-bin sox bc
     # fuse-sshfs
     #sudo apt-get install -y xfce4-panel xterm gnome-icon-theme lxappearance thunar
 

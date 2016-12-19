@@ -3,10 +3,18 @@ Vagrant.configure("2") do |config|
   config.vm.define "gpu" do |gpu|
     config.vm.provider "aws" do |aws, override|
       # NVIDIA AMI in N Virginia (https://aws.amazon.com/marketplace/ordering?productId=d3fbf14b-243d-46e0-916c-82a8bf6955b4&ref_=dtl_psb_continue&region=us-east-1)
-      aws.ami = "ami-2e5e9c43"
-      aws.instance_type="g2.2xlarge"
+      aws.ami = "ami-a41a3fb3"
+      aws.instance_type="p2.xlarge"
+      #aws.instance_type="g2.2xlarge"
       #aws.instance_type="g2.8xlarge"
       override.ssh.username = "ec2-user"
+
+      # this can be used to add a disc to p2 instances (needs to be mounted manually for now)
+      aws.block_device_mapping = [{
+                                    'DeviceName' => '/dev/xvdb',
+                                    'Ebs.VolumeSize' => 60,
+                                    'Ebs.VolumeType' => 'gp2',
+                                    'Ebs.DeleteOnTermination' => 'true' }]
 
       # try ami-34148f23
       # sudo add-apt-repository ppa:graphics-drivers/ppa
@@ -97,7 +105,7 @@ Vagrant.configure("2") do |config|
     
     aws.region_config "us-east-1" do |region|
       #region.spot_instance = true
-      region.spot_max_price = "0.1"
+      #region.spot_max_price = "0.5"
     end
     
     # this works around the error (ubuntu linux host):
@@ -145,6 +153,11 @@ Vagrant.configure("2") do |config|
         mdadm --create --run --verbose /dev/md0 --level=0 --name=raid0 --raid-devices=2 /dev/xvdb /dev/xvdc
         mkfs.ext4 -L raid /dev/md0
         mount /dev/md0 /media/ephemeral0
+      elseif [[ `lsblk` =~ xvdb && `lsblk -o MOUNTPOINT /dev/xvdb | wc -l` < 2 ]]; then
+        # we have one drive that needs mounting
+        umount /media/ephemeral0 || echo ephemeral0 not mounted
+        mkfs.ext4 -L raid /dev/xvdb
+        mount /dev/xvdb /media/ephemeral0
       else
         echo Only one block device detected, hopefully already mounted
       fi
