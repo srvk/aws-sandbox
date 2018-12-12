@@ -24,6 +24,7 @@ You can do the following experiments in the VM:
 
 - And let's run our experiments:
 
+  - `ln -s spkList.dev spkList.dev2h` (a small bug fix)
   - `./run-1-main.sh >& log/my-run.log`
   - `./train-7-gpu.sh >& log/my-train.log`
   - `./test-7-v1_x3.sh >& log/my-test.log`
