@@ -5,7 +5,7 @@ You need to do the following steps in order to be able to use the provided AMI.
 - Sign up for an AWS account and create a [key-pair](https://console.aws.amazon.com/ec2/v2/home?region=us-east-1#KeyPairs:sort=keyName)
 - Install the keys (for US East/ N. Virginia region) on your local machine, so that you can fire up an EC2 instance.
 - If you have credits for AWS, apply those.
-- [An alternative guide](http://speechkitchen.org/interspeech-haitian-demo-vm/) (with pictures)
+- [An alternative guide](http://speech-kitchen.org/interspeech-haitian-demo-vm/) (with pictures)
 
 [Next, fire up the VM.](IS2016-Running.md)
 
